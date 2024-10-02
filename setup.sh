@@ -92,34 +92,34 @@ cd /home/jetson/jetsonEnv
 
 . set_influxdb_env.sh
 
-# sudo apt-get install -y nvidia-container-runtime
+sudo apt-get install -y nvidia-container-runtime
 
 # set -e : 스크립트 실행 중 에러가 발생하면 중단
-# set -e
+set -e
 
 # # NVIDIA 컨테이너 런타임 설정을 /etc/docker/daemon.json에 추가
-# echo "Configuring NVIDIA container runtime in /etc/docker/daemon.json"
+echo "Configuring NVIDIA container runtime in /etc/docker/daemon.json"
 
-# sudo bash -c 'cat > /etc/docker/daemon.json << EOF
-# {
-#     "runtimes": {
-#         "nvidia": {
-#             "path": "nvidia-container-runtime",
-#             "runtimeArgs": []
-#         }
-#     }
-# }
-# EOF'
+sudo bash -c 'cat > /etc/docker/daemon.json << EOF
+{
+    "runtimes": {
+        "nvidia": {
+            "path": "nvidia-container-runtime",
+            "runtimeArgs": []
+        }
+    }
+}
+EOF'
 
 # # Docker 데몬 다시 로드 및 재시작
-# echo "Reloading and restarting Docker daemon..."
-# sudo systemctl daemon-reload
-# sudo systemctl restart docker
+echo "Reloading and restarting Docker daemon..."
+sudo systemctl daemon-reload
+sudo systemctl restart docker
 
-# # Docker 데몬 상태 확인
-# echo "Docker daemon status:"
-# sudo systemctl status docker
+# Docker 데몬 상태 확인
+echo "Docker daemon status:"
+sudo systemctl status docker
 
-# echo "NVIDIA container runtime has been configured and Docker has been restarted."
+echo "NVIDIA container runtime has been configured and Docker has been restarted."
 
 docker run --restart always -it --name edge --runtime nvidia --device /dev/video0 -e INFLUX_TOKEN=$INFLUX_TOKEN -e INFLUX_BUCKET=$INFLUX_BUCKET -e INFLUX_ORG=$INFLUX_ORG -e INFLUX_HOST=$INFLUX_HOST --env HOST_IP=$(hostname -I | awk '{print $1}') --network host --volume /tmp/argus_socket:/tmp/argus_socket -v /home/jetson/jetsonEnv:/loc -w /loc --privileged aimedia/jetson-gst-yolov8:0.5 python3 test.py
