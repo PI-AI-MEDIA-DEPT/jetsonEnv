@@ -15,12 +15,17 @@ sudo rm -rf /usr/local/cuda/samples \
 /opt/nvidia/deepstream/deepstream*/samples
 
 sudo apt-get update && sudo apt-get install cuda-toolkit-10-2 -y
+
 export LD_LIBRARY_PATH=/usr/local/cuda-10.2/lib64:$LD_LIBRARY_PATH
+
 source ~/.bashrc
-echo "yahboom" sudo -S apt install nvidia-container-csv-cuda
+sudo apt install nvidia-container-csv-cuda
 sudo apt install nvidia-container-csv-cudnn -y
-echo "yahboom"  apt-get install -y nvidia-container-toolkit
+sudo apt-get install -y nvidia-container-toolkit
 #!/bin/bash
+
+export PATH=/usr/local/cuda-10.2/bin${PATH:+:${PATH}}$ 
+export LD_LIBRARY_PATH=/usr/local/cuda-10.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
 
 # MediaMTX 다운로드
@@ -83,11 +88,11 @@ cd /home/jetson/jetsonEnv
 chmod +x set_apiserver.sh
 chmod +x set_influxdb_env.sh
 
-. install_full.sh -m imx477
+# . install_full.sh -m imx477
 
 cd /home/jetson/jetsonEnv
 
-. set_apiserver.sh
+# . set_apiserver.sh
 
 cd /home/jetson/jetsonEnv
 
