@@ -6,12 +6,6 @@ from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
 import datetime
 
-"""
-gstreamer_pipeline returns a GStreamer pipeline for capturing from the CSI camera
-Flip the image by setting the flip_method (most common values: 0 and 2)
-display_width and display_height determine the size of each camera pane in the window on the screen
-Default 1920x1080 displayd in a 1/4 size window
-"""
 
 def gstreamer_pipeline(
     sensor_id=0,
@@ -19,7 +13,7 @@ def gstreamer_pipeline(
     capture_height=540,
     display_width=960,
     display_height=540,
-    framerate=15,
+    framerate=10,
     flip_method=0,
 ):
     return (
@@ -41,9 +35,7 @@ def gstreamer_pipeline(
     )
 
 def get_bottom_center(xmin, ymin, xmax, ymax):
-    x_center = (xmin + xmax) / 2
-    y_bottom = ymax
-    return x_center, y_bottom
+    return (xmin + xmax) / 2, ymax
 
 def show_camera():
     host_ip = os.getenv("HOST_IP")
@@ -64,12 +56,12 @@ def show_camera():
     model = YOLO('./yolov8n.pt')
     CONFIDENCE_THRESHOLD = 0.5
     GREEN = (0, 255, 0)
-    WHITE = (255, 255, 255)
+
     recode_out = cv2.VideoWriter('appsrc ! videoconvert' + \
-                            ' ! x264enc speed-preset=ultrafast bitrate=1400 key-int-max=' + str(15) + \
+                            ' ! x264enc speed-preset=ultrafast bitrate=1400 key-int-max=' + str(10) + \
                             ' ! video/x-h264,profile=baseline' + \
                             f' ! rtspclientsink location=rtsp://{host_ip}:8554/mystream',
-                            cv2.CAP_GSTREAMER, 0, 15, (960,540), True)
+                            cv2.CAP_GSTREAMER, 0, 10, (960,540), True)
     print(gstreamer_pipeline(flip_method=0))
     video_capture = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
     if video_capture.isOpened():
@@ -89,8 +81,9 @@ def show_camera():
 
                         cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), GREEN, 2)
                         x_center, y_bottom = get_bottom_center(xmin, ymin, xmax, ymax)
+                        # print(x_center ,type(x_center))
                         point = (
-                            Point("person_location")                            # Measurement name
+                            Point(f"{host_ip}")                            # Measurement name
                             .tag("clientIP", str(host_ip) )                     # Tag for person ID
                             .field("cx", x_center)                             # Field for X coordinate
                             .field("cy", y_bottom)                             # Field for Y coordinate                        # Optional: Field for Z coordinate
@@ -103,11 +96,6 @@ def show_camera():
                     else :
                         pass
 
-                # end = datetime.datetime.now()
-                # total = (end - start).total_seconds()
-                # print(f'Time to process 1 frame: {total * 1000:.0f} milliseconds')
-                #fps = f'FPS: {1 / total:.2f}'
-                #print("FPS: ",fps)
                 frame = cv2.resize(frame,(960,540))
                 recode_out.write(frame)
                 keyCode = cv2.waitKey(10) & 0xFF
