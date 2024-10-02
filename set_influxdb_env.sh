@@ -10,25 +10,27 @@ export INFLUX_HOST=192.168.33.5
 echo "INFLUX_TOKEN: $INFLUX_TOKEN"
 echo "INFLUX_BUCKET: $INFLUX_BUCKET"
 echo "INFLUX_HOST: $INFLUX_HOST"
+echo "INFLUX_ORG: $INFLUX_ORG"
 
+# 스크립트에 실행 권한 부여
+chmod +x set_influxdb_env.sh
 
-#chmod +x set_influxdb_env.sh
-#./set_influxdb_env.sh
-# source ./set_influxdb_env.sh
+# 스크립트 실행
+./set_influxdb_env.sh
 
-#sudo nano /etc/systemd/system/set_influxdb_env.service
+# systemd 서비스 파일 생성
+sudo bash -c 'cat << EOF > /etc/systemd/system/set_influxdb_env.service
+[Unit]
+Description=Set InfluxDB Environment Variables
 
-#creat ini file
+[Service]
+ExecStart=/path/to/set_influxdb_env.sh
+Type=oneshot
 
-# [Unit]
-# Description=Set InfluxDB Environment Variables
+[Install]
+WantedBy=multi-user.target
+EOF'
 
-# [Service]
-# ExecStart=/path/to/set_influxdb_env.sh
-# Type=oneshot
-
-# [Install]
-# WantedBy=multi-user.target
-
-# sudo systemctl daemon-reload
-# sudo systemctl enable set_influxdb_env.service
+# systemd 서비스 재로드 및 활성화
+sudo systemctl daemon-reload
+sudo systemctl enable set_influxdb_env.service
