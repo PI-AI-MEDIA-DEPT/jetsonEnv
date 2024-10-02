@@ -22,7 +22,7 @@ sudo bash -c 'cat << EOF > /etc/systemd/system/set_influxdb_env.service
 Description=Set InfluxDB Environment Variables
 
 [Service]
-ExecStart=/path/to/set_influxdb_env.sh
+ExecStart=/home/jetson/jetsonEnv/set_influxdb_env.sh
 Type=oneshot
 
 [Install]
