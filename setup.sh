@@ -93,11 +93,11 @@ cd /home/jetson/jetsonEnv
 chmod +x set_apiserver.sh
 chmod +x set_influxdb_env.sh
 
-# . install_full.sh -m imx477
+. install_full.sh -m imx477
 
 cd /home/jetson/jetsonEnv
 
-# . set_apiserver.sh
+. set_apiserver.sh
 
 cd /home/jetson/jetsonEnv
 
