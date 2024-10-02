@@ -16,6 +16,7 @@ sudo rm -rf /usr/local/cuda/samples \
 
 sudo apt-get update && sudo apt-get install cuda-toolkit-10-2 -y
 export LD_LIBRARY_PATH=/usr/local/cuda-10.2/lib64:$LD_LIBRARY_PATH
+source ~/.bashrc
 echo "yahboom" sudo -S apt install nvidia-container-csv-cuda
 sudo apt install nvidia-container-csv-cudnn -y
 echo "yahboom"  apt-get install -y nvidia-container-toolkit
@@ -116,10 +117,11 @@ echo "Reloading and restarting Docker daemon..."
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 
-# Docker 데몬 상태 확인
-echo "Docker daemon status:"
-sudo systemctl status docker
-
 echo "NVIDIA container runtime has been configured and Docker has been restarted."
 
-docker run --restart always -it --name edge --runtime nvidia --device /dev/video0 -e INFLUX_TOKEN=$INFLUX_TOKEN -e INFLUX_BUCKET=$INFLUX_BUCKET -e INFLUX_ORG=$INFLUX_ORG -e INFLUX_HOST=$INFLUX_HOST --env HOST_IP=$(hostname -I | awk '{print $1}') --network host --volume /tmp/argus_socket:/tmp/argus_socket -v /home/jetson/jetsonEnv:/loc -w /loc --privileged aimedia/jetson-gst-yolov8:0.5 python3 test.py
+
+sudo usermod -aG docker ${USER}
+sudo service docker restart
+
+echo "yahboom" sudo -S reboot
+
