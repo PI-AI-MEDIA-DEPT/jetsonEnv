@@ -12,24 +12,7 @@ echo "INFLUX_BUCKET: $INFLUX_BUCKET"
 echo "INFLUX_HOST: $INFLUX_HOST"
 echo "INFLUX_ORG: $INFLUX_ORG"
 
-# 스크립트에 실행 권한 부여 (한 번만 필요)
-# chmod +x /home/jetson/jetsonEnv/set_influxdb_env.sh
-
-# systemd 서비스 파일 생성
-sudo bash -c 'cat << EOF > /etc/systemd/system/set_influxdb_env.service
-[Unit]
-Description=Set InfluxDB Environment Variables
-
-[Service]
-ExecStart=/home/jetson/jetsonEnv/set_influxdb_env.sh
-Type=oneshot
-
-[Install]
-WantedBy=multi-user.target
-EOF'
-
-# systemd 서비스 재로드 및 활성화
-sudo systemctl daemon-reload
-sudo systemctl enable set_influxdb_env.service
-
-#sudo systemctl status set_influxdb_env.service
+# # 스크립트에 실행 권한 부여 (한 번만 필요)
+# # chmod +x /home/jetson/jetsonEnv/set_influxdb_env.sh
+#실행시 
+#. set_influxdb_env.sh
