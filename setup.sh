@@ -83,7 +83,7 @@ sudo systemctl enable mediamtx
 sudo systemctl start mediamtx
 
 # 상태 확인
-sudo systemctl status mediamtx
+# sudo systemctl status mediamtx
 
 
 git clone https://github.com/PI-AI-MEDIA-DEPT/jetsonEnv.git
