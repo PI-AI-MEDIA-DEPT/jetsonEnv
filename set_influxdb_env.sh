@@ -31,3 +31,5 @@ EOF'
 # systemd 서비스 재로드 및 활성화
 sudo systemctl daemon-reload
 sudo systemctl enable set_influxdb_env.service
+
+#sudo systemctl status set_influxdb_env.service
