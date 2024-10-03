@@ -13,7 +13,7 @@ def gstreamer_pipeline(
     capture_height=540,
     display_width=960,
     display_height=540,
-    framerate=10,
+    framerate=5,
     flip_method=0,
 ):
     return (
@@ -61,7 +61,7 @@ def show_camera():
                             ' ! x264enc speed-preset=ultrafast bitrate=1400 key-int-max=' + str(10) + \
                             ' ! video/x-h264,profile=baseline' + \
                             f' ! rtspclientsink location=rtsp://{host_ip}:8554/mystream',
-                            cv2.CAP_GSTREAMER, 0, 10, (960,540), True)
+                            cv2.CAP_GSTREAMER, 0, 5, (960,540), True)
     print(gstreamer_pipeline(flip_method=0))
     video_capture = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
     if video_capture.isOpened():
