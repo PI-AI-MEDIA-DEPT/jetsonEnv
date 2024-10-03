@@ -132,5 +132,10 @@ echo "NVIDIA container runtime has been configured and Docker has been restarted
 sudo usermod -aG docker ${USER}
 sudo service docker restart
 
+
+sudo apt autoremove -y
+sudo apt clean
+
+
 echo "yahboom" sudo -S reboot
 
