@@ -162,3 +162,5 @@ if [ $? -ne 0 ]; then
 	echo -e "${RED}Unknown error, please send the error message to support@arducam.com${NC}"
 	exit -1
 fi
+
+rm /home/jetson/jetsonEnv/arducam-nvidia-l4t-kernel-t210-4.9.337-tegra-32.7.4-20240321142548_arm64_imx477.deb

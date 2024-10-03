@@ -49,6 +49,7 @@ fi
 sudo mv mediamtx /usr/local/bin/
 sudo mv mediamtx.yml /usr/local/etc/
 
+rm mediamtx_v1.9.1_linux_arm64v8.tar.gz
 # 파일이 제대로 이동되었는지 확인
 if [ ! -f /usr/local/bin/mediamtx ]; then
   echo "mediamtx 실행 파일을 찾을 수 없습니다."
