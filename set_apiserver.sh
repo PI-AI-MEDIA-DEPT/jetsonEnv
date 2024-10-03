@@ -48,7 +48,7 @@ fi
  
 # 압축 해제
 cd /home/jetson/Desktop/
-tar -xvf /home/jetson/Desktop/api.tar
+tar -xvf /home/jetson/Desktop/api.tar -C /home/jetson/Desktop/
  
 # streamlog 디렉토리 생성
 mkdir -p /home/jetson/streamlog
