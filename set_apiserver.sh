@@ -39,7 +39,7 @@ sudo service udev reload
 sudo service udev restart
  
 # 파일 다운로드
-file_id="1q_XHVZmCkhdwsYamoPlwuzbvbd3Kk782"
+file_id="1kDu90ypv9IJQQJOlzSpoYY925A3fUocA"
 file_name="/home/jetson/Desktop/api.tar"  # 경로를 사용자 홈 디렉토리로 수정
 if ! wget "https://drive.google.com/uc?export=download&id=$file_id" -O ${file_name}; then
     echo "파일 다운로드 실패"
