@@ -47,6 +47,7 @@ if ! wget "https://drive.google.com/uc?export=download&id=$file_id" -O ${file_na
 fi
  
 # 압축 해제
+cd /home/jetson/Desktop/
 tar -xvf /home/jetson/Desktop/api.tar
  
 # streamlog 디렉토리 생성
