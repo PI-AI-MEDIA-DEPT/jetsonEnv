@@ -4,7 +4,7 @@
 INFLUX_TOKEN=nxft2SEGZrEH2-jwDIea6tDSiX6TqHn50u0kOcDqSRnUdnK25VYauC0buWdwh-UFq6dgeb7qf3pMyKg6sbf6zg==
 INFLUX_BUCKET=AI
 INFLUX_ORG=paimedialab
-INFLUX_HOST=192.168.33.5
+INFLUX_HOST=http://192.168.33.5:8086
 
 # 환경 변수를 /etc/environment에 저장
 echo "INFLUX_TOKEN=$INFLUX_TOKEN" | sudo tee -a /etc/environment
