@@ -12,12 +12,12 @@ def gstreamer_pipeline(
     flip_method=0,
 ):
     return (
-        "nvarguscamerasrc sensor-id=%d ! "
+        "nvarguscamerasrc sensor-id=%d maxperf=true ! "
         "video/x-raw(memory:NVMM), width=(int)%d, height=(int)%d, framerate=(fraction)%d/1 ! "
         "nvvidconv flip-method=%d ! "
         "video/x-raw, width=(int)%d, height=(int)%d, format=(string)BGRx ! "
         "videoconvert ! "
-        "video/x-raw, format=(string)BGR ! appsink"
+        "video/x-raw, format=(string)BGR ! appsink max-buffers=1 drop=true "
         % (
             sensor_id,
             capture_width,
@@ -32,11 +32,11 @@ def gstreamer_pipeline(
 def show_camera():
     host_ip = os.getenv("HOST_IP")
     recode_out = cv2.VideoWriter('appsrc ! videoconvert' + \
-                            ' ! x264enc speed-preset=ultrafast bitrate=3500 key-int-max=' + str(10) + \
+                            ' ! x264enc tune=zerolatency speed-preset=ultrafast bitrate=3500 key-int-max=' + str(10) + \
                             ' ! video/x-h264,profile=baseline' + \
-                            f' ! rtspclientsink location=rtsp://{host_ip}:8554/mystream',
+                            f' ! rtspclientsink location=rtsp://{host_ip}:8554/mystream latency=0',
                             cv2.CAP_GSTREAMER, 0, 15, (1920,1080), True)
-    video_capture = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
+    video_capture = cv2.VideoCapture(gstreamer_pipeline(flip_method=2), cv2.CAP_GSTREAMER)
     if video_capture.isOpened():
         try:
             while True:
