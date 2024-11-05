@@ -21,6 +21,7 @@ pip3 install psutil
 # mpg123 및 GStreamer RTSP 서버 패키지 설치
 echo "Installing system packages..."
 sudo apt-get install -y mpg123
+sudo apt install -y libgstrtspserver-1.0-dev gir1.2-gst-rtsp-server-1.0
  
 # 현재 사용자를 dialout 및 tty 그룹에 추가
 echo "Adding user to dialout and tty groups..."
