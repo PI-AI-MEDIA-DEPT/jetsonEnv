@@ -31,7 +31,7 @@
   - nvr 체크
   - troubleshoting
   - docker restart
-  -  ```
+  - ```
     docker 명령어 재실행
     ```
   - systemctl restart service
