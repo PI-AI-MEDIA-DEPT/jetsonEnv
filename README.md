@@ -2,7 +2,7 @@
 
 
 
-#IP Setting
+## IP Setting
 
   - 고정 아이피 세팅
   - HDMI 연결후에 하는 법
@@ -16,7 +16,9 @@
 
   - dhcp로 세팅
   - HDMI 연결후에 하는 법
-  - Command line 으로 하는법
+  - ```
+    Command line 으로 하는법
+    ```
 
 ## Camera Check
 
@@ -29,7 +31,9 @@
   - nvr 체크
   - troubleshoting
   - docker restart
-  - docker 명령어 재실행
+  -  ```
+    docker 명령어 재실행
+    ```
   - systemctl restart service
     
   stream으로 실행시
@@ -40,7 +44,7 @@
   - vlc 체크
   - nvr 체크
 
-#LongRun Test
+## LongRun Test
 
    - DHCP 경우
    - 고정 아이피인 경우
