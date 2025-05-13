@@ -1,12 +1,14 @@
 # MK3 Check List
 
 
-```
+
 #IP Setting
-```
+
   - 고정 아이피 세팅
   - HDMI 연결후에 하는 법
+  - ```
   - Command line 으로 하는법
+  - ```
 
   - 고정 아이피 변경
   - HDMI 연결후에 하는 법
