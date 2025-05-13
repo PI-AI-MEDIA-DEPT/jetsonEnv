@@ -43,7 +43,7 @@
   - camera fastapi service check
   - vlc 체크
   - nvr 체크
-
+* [Dropwizard]
 ## LongRun Test
 
    - DHCP 경우
