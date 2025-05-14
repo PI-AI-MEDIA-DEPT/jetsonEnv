@@ -34,7 +34,7 @@ def show_camera():
     recode_out = cv2.VideoWriter('appsrc ! videoconvert' + \
                             ' ! x264enc tune=zerolatency speed-preset=ultrafast bitrate=3500 key-int-max=' + str(10) + \
                             ' ! video/x-h264,profile=baseline' + \
-                            f' ! rtspclientsink location=rtsp://{host_ip}:8554/mystream latency=0',
+                            f' ! rtspclientsink location=rtsp://127.0.0.1:8554/mystream latency=0',
                             cv2.CAP_GSTREAMER, 0, 15, (1920,1080), True)
     video_capture = cv2.VideoCapture(gstreamer_pipeline(flip_method=2), cv2.CAP_GSTREAMER)
     if video_capture.isOpened():
