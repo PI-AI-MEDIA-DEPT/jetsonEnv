@@ -10,6 +10,44 @@
     Command line 으로 하는법
     ```
 
+
+    nmcli connection show
+    nmcli device status
+
+    create network profile 
+    static-ip
+    sudo nmcli connection add type ethernet ifname eth0 con-name static-ip autoconnect no ip4 192.168.x.x/24
+
+    dhcp
+    sudo nmcli connection add type ethernet ifname eth0 con-name dhcp-ip ipv4.method auto
+
+    swithch network profile DHCP -> STATIC
+
+    sudo nmcli connection modify dhcp-ip connection.autoconnect no
+    sudo nmcli connection modify static-ip connection.autoconnect yes
+
+    sudo reboot
+
+
+    swithch network profile DHCP -> STATIC
+
+    sudo nmcli connection modify static-ip connection.autoconnect no
+    sudo nmcli connection modify dhcp-ip connection.autoconnect yes
+
+    sudo reboot
+
+
+    modify static ip address
+    sudo nmcli connection modify static-ip ipv4.addresses 192.168.1.102/24
+    sudo reboot
+    
+    opt1. sudo nmcli connection modify static-ip ipv4.gateway 192.168.1.1
+    opt2. sudo nmcli connection modify static-ip ipv4.dns "8.8.8.8 1.1.1.1"
+
+    ip addr show eth0
+
+
+  
   ### 고정 아이피 변경
   - HDMI 연결후에 하는 법
   - ```
