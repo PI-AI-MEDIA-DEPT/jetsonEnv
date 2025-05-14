@@ -5,6 +5,7 @@
 ## IP Setting
   ### 공통사항
   네트워크 프로필 생성
+  
     nmcli connection show
     nmcli device status
 
@@ -13,6 +14,7 @@
 
     dhcp
     sudo nmcli connection add type ethernet ifname eth0 con-name dhcp-ip ipv4.method auto
+    
   ### 고정 아이피 세팅
   - ```
     sudo nmcli connection modify dhcp-ip connection.autoconnect no
