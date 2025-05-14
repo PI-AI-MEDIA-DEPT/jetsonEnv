@@ -4,30 +4,31 @@
 
 ## IP Setting
 
-###고정 아이피 세팅
+  ### 고정 아이피 세팅
   - HDMI 연결후에 하는 법
   - ```
     Command line 으로 하는법
     ```
 
-  ###고정 아이피 변경
+  ### 고정 아이피 변경
   - HDMI 연결후에 하는 법
-  - Command line 으로 하는법
+  - ```
+    Command line 으로 하는법
+    ```
 
-
-  ###dhcp로 세팅
+  ### dhcp로 세팅
   - HDMI 연결후에 하는 법
   - ```
     Command line 으로 하는법
     ```
 
 
-  - sunba camera ip setting
+  ### sunba camera ip setting
   - vms 통해서 변경
 
 ## Camera Check
 
-  docker 실행시
+  ### docker 실행시
   - mediamtx service check
   - camera fastapi service check
   - docker check
@@ -41,7 +42,7 @@
     ```
   - systemctl restart service
     
-  stream으로 실행시
+  ### stream으로 실행시
   - docker rm -f 
   - mediamtx service stop
   - main.py 변경
