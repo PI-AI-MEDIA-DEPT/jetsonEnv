@@ -45,31 +45,34 @@
 
   ### docker 실행시
   - mediamtx service check
+    -> sudo systemctl status mediamtx.service
   - camera fastapi service check
+    -> sudo systemctl status api.service
   - docker check
-  - docker ps
-  - http :8889 체크
-  - nvr 체크
-  - troubleshoting
-  - docker restart
-  - ```
-    docker 명령어 재실행
-    ```
-  - systemctl restart service
+    -> docker ps
+  - WebRTC 체크
+    -> http://{{IP}}:8889
+  - NVR 체크
+    -> NVR 화면에서 카메라 나오는지 확인 
     
   ### stream으로 실행시
-  - docker rm -f 
-  - mediamtx service stop
+  - 기존 도커 삭제
+    -> docker rm -f edge
+  - mediamtx 서비스 종료
+    -> sudo systemctl stop mediamtx.service
+    -> sudo systemctl disable mediamtx.service
   - main.py 변경
-  - camera fastapi service check
-  - vlc 체크
-  - nvr 체크
+  - api.service 재시작
+    -> sudo systemctl restart api.service
+  - NVR 체크
+    -> NVR 화면에서 카메라 나오는지 확인 
 
 ## Focus 체크
-
+- NVR 또는 Webrtc로 화면 작동 확인
+- http://{{IP}}:7777/setFocus/{{value}}
+  0 ~ 1000 사이의 value 값을 넣어서 확인 
 
 ## LongRun Test
-
    - DHCP 경우
    - 고정 아이피인 경우
 
@@ -78,10 +81,14 @@
    - Configration(Django) 
    - Object Detection
    
-   
    - send log to influxDB cloud(bit / logstas / influxdb)
 
-
+## 문제 해결
+  - 영상이 안보이거나 NVR 카메라연결이 안될때
+    -> docker restart edge
+  - ```
+    docker 명령어 재실행
+    ```
 longrun test 
 1. 카메라 poe 전원주기
 2. nvr이 있다면 모든카메라의 화면 확인
