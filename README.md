@@ -3,22 +3,18 @@
 
 
 ## IP Setting
-
-  ### 고정 아이피 세팅
-   Command line 으로 하는법
-  - ```
+  ### 공통사항
+  네트워크 프로필 생성
     nmcli connection show
     nmcli device status
 
-    create network profile 
     static-ip
     sudo nmcli connection add type ethernet ifname eth0 con-name static-ip autoconnect no ip4 192.168.x.x/24
 
     dhcp
     sudo nmcli connection add type ethernet ifname eth0 con-name dhcp-ip ipv4.method auto
-
-    swithch network profile DHCP -> STATIC
-
+  ### 고정 아이피 세팅
+  - ```
     sudo nmcli connection modify dhcp-ip connection.autoconnect no
     sudo nmcli connection modify static-ip connection.autoconnect yes
 
@@ -27,9 +23,7 @@
     ```
   
   ### 고정 아이피 변경
-  Command line 으로 하는법
   - ```
-    modify static ip address
     sudo nmcli connection modify static-ip ipv4.addresses 192.168.1.102/24
     sudo reboot
     
@@ -40,10 +34,7 @@
     ```
 
   ### DHCP 세팅
-  Command line 으로 하는법
   - ```
-    swithch network profile DHCP -> STATIC
-
     sudo nmcli connection modify static-ip connection.autoconnect no
     sudo nmcli connection modify dhcp-ip connection.autoconnect yes
 
