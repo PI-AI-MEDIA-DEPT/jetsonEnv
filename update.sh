@@ -7,3 +7,4 @@ git fetch origin
 
 # Forcefully reset local repo to match the remote branch
 git reset --hard origin/main
+git pull
