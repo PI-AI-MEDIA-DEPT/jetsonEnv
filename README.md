@@ -5,10 +5,8 @@
 ## IP Setting
 
   ### 고정 아이피 세팅
-  - HDMI 연결후에 하는 법
+   Command line 으로 하는법
   - ```
-    Command line 으로 하는법
-
     nmcli connection show
     nmcli device status
 
@@ -29,10 +27,8 @@
     ```
   
   ### 고정 아이피 변경
-  - HDMI 연결후에 하는 법
+  Command line 으로 하는법
   - ```
-    Command line 으로 하는법
-
     modify static ip address
     sudo nmcli connection modify static-ip ipv4.addresses 192.168.1.102/24
     sudo reboot
@@ -43,11 +39,9 @@
     ip addr show eth0
     ```
 
-  ### dhcp로 세팅
-  - HDMI 연결후에 하는 법
+  ### DHCP 세팅
+  Command line 으로 하는법
   - ```
-    Command line 으로 하는법
-    
     swithch network profile DHCP -> STATIC
 
     sudo nmcli connection modify static-ip connection.autoconnect no
