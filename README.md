@@ -19,19 +19,15 @@
   - ```
     sudo nmcli connection modify dhcp-ip connection.autoconnect no
     sudo nmcli connection modify static-ip connection.autoconnect yes
-
     sudo reboot
-    
     ```
   
   ### 고정 아이피 변경
   - ```
     sudo nmcli connection modify static-ip ipv4.addresses 192.168.1.102/24
     sudo reboot
-    
     opt1. sudo nmcli connection modify static-ip ipv4.gateway 192.168.1.1
     opt2. sudo nmcli connection modify static-ip ipv4.dns "8.8.8.8 1.1.1.1"
-
     ip addr show eth0
     ```
 
@@ -39,10 +35,8 @@
   - ```
     sudo nmcli connection modify static-ip connection.autoconnect no
     sudo nmcli connection modify dhcp-ip connection.autoconnect yes
-
     sudo reboot
     ```
-
 
   ### sunba camera ip setting
   - vms 통해서 변경
