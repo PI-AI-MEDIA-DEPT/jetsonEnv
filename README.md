@@ -50,6 +50,9 @@
   - vlc 체크
   - nvr 체크
 
+## Focus 체크
+
+
 ## LongRun Test
 
    - DHCP 경우
