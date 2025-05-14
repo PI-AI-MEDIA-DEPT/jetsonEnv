@@ -58,6 +58,15 @@
    - DHCP 경우
    - 고정 아이피인 경우
 
+   - Video Streaming
+   - PTZ  API Call <-> Onvif Server + Schedule program
+   - Configration(Django) 
+   - Object Detection
+   
+   
+   - send log to influxDB cloud(bit / logstas / influxdb)
+
+
 longrun test 
 1. 카메라 poe 전원주기
 2. nvr이 있다면 모든카메라의 화면 확인
