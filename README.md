@@ -49,9 +49,13 @@
    sudo systemctl status mediamtx.service
    ```
   - camera fastapi service check
-    -> sudo systemctl status api.service
+   ```
+    sudo systemctl status api.service
+   ```
   - docker check
-    -> docker ps
+   ```
+    docker ps
+   ```
   - WebRTC 체크
     -> http://{{IP}}:8889
   - NVR 체크
@@ -59,13 +63,19 @@
     
   ### stream으로 실행시
   - 기존 도커 삭제
-    -> docker rm -f edge
+   ```
+    docker rm -f edge
+   ```
   - mediamtx 서비스 종료
-    -> sudo systemctl stop mediamtx.service
-    -> sudo systemctl disable mediamtx.service
+   ```
+    sudo systemctl stop mediamtx.service
+    sudo systemctl disable mediamtx.service
+   ```
   - main.py 변경
   - api.service 재시작
-    -> sudo systemctl restart api.service
+   ```
+    sudo systemctl restart api.service
+   ```
   - NVR 체크
     -> NVR 화면에서 카메라 나오는지 확인 
 
