@@ -47,7 +47,7 @@
   - mediamtx service check
    ```
    sudo systemctl status mediamtx.service
-    ```
+   ```
   - camera fastapi service check
     -> sudo systemctl status api.service
   - docker check
