@@ -45,7 +45,7 @@
 
   ### docker 실행시
   - mediamtx service check
-        ```
+   ```
    sudo systemctl status mediamtx.service
     ```
   - camera fastapi service check
