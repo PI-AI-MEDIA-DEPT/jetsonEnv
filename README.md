@@ -84,10 +84,13 @@
 - http://{{IP}}:7777/setFocus/{{value}}
   0 ~ 1000 사이의 value 값을 넣어서 확인 
 
-## LongRun Test
-   - DHCP 경우
-   - 고정 아이피인 경우
+## 기능 Test
+  1. 카메라 poe 전원주기
+  2. nvr이 있다면 모든카메라의 화면 확인
+  3. txt파일에 연결하고자하는 모든 ip 작성
+  4. pc에서 프로그램 실행 -> 연결했던 모든 카메라가 1시간에 한번씩  pan tilt 변경 0,0 -> 50,50 -> 100,80 -> 0,0
 
+## LongRun Test
    - Video Streaming
    - PTZ  API Call <-> Onvif Server + Schedule program
    - Configration(Django) 
@@ -97,13 +100,11 @@
 
 ## 문제 해결
   - 영상이 안보이거나 NVR 카메라연결이 안될때
-    -> docker restart edge
+   ```
+    docker restart edge
+   ```
   - ```
     docker 명령어 재실행
     ```
-longrun test 
-1. 카메라 poe 전원주기
-2. nvr이 있다면 모든카메라의 화면 확인
-3. txt파일에 연결하고자하는 모든 ip 작성
-4. pc에서 프로그램 실행 -> 연결했던 모든 카메라가 1시간에 한번씩  pan tilt 변경 0,0 -> 50,50 -> 100,80 -> 0,0
+
    
