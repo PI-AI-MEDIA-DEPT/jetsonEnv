@@ -57,7 +57,7 @@
     docker ps
    ```
   - WebRTC 체크
-    -> http://{{IP}}:8889
+    -> http://{{IP}}:8889/mystream
   - NVR 체크
     -> NVR 화면에서 카메라 나오는지 확인 
     
