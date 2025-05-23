@@ -107,4 +107,5 @@
     docker 명령어 재실행
     ```
 
-   
+## nvr 카메라 연결
+   - https://docs.google.com/document/d/1VF08EdpTQruhooPVtSs50QzwxWs8y4TaYX3Cy-dVags/edit?tab=t.0
