@@ -104,6 +104,10 @@ cd /home/jetson/jetsonEnv
 
 . set_influxdb_env.sh
 
+cd /home/jetson/jetsonEnv
+
+. set_wsdd.sh
+
 # set -e : 스크립트 실행 중 에러가 발생하면 중단
 set -e
 
