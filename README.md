@@ -9,7 +9,7 @@
     nmcli connection show
     nmcli device status
 
-    . set_network_profile #원하는 고정 IP
+    . set_network_profile #원하는 고정 IP #게이트웨이
     
   ### 고정 아이피 세팅
   - ```
