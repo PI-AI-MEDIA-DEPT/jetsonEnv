@@ -16,6 +16,9 @@
     sudo nmcli connection modify dhcp-ip connection.autoconnect no
     sudo nmcli connection modify static-ip connection.autoconnect yes
     sudo reboot
+
+
+    sudo nmcli connection up static-ip
     ```
   
   ### 고정 아이피 변경
@@ -32,6 +35,8 @@
     sudo nmcli connection modify static-ip connection.autoconnect no
     sudo nmcli connection modify dhcp-ip connection.autoconnect yes
     sudo reboot
+
+    sudo nmcli connection up dhcp-ip
     ```
 
   ### sunba camera ip setting
