@@ -9,11 +9,7 @@
     nmcli connection show
     nmcli device status
 
-    static-ip
-    sudo nmcli connection add type ethernet ifname eth0 con-name static-ip autoconnect no ip4 192.168.x.x/24
-
-    dhcp
-    sudo nmcli connection add type ethernet ifname eth0 con-name dhcp-ip ipv4.method auto
+    . set_network_profile #원하는 고정 IP
     
   ### 고정 아이피 세팅
   - ```
