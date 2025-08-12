@@ -110,3 +110,22 @@
 
 ## nvr 카메라 연결
    - https://docs.google.com/document/d/1VF08EdpTQruhooPVtSs50QzwxWs8y4TaYX3Cy-dVags/edit?tab=t.0
+
+
+## onvif_srvd 설치
+git clone or git pull or git update ,.. 
+
+find onvif_srvd_package.zip
+
+unzip -o onvif_srvd_package.zip
+cd build 
+
+sudo ./onvif_srvd \
+  --ifs eth0 \
+  --name JetsonPTZ \
+  --width 1280 --height 720 \
+  --url 'rtsp://%s:8554/mystream' \
+  --type H264 \
+  --scope onvif://www.onvif.org/Profile/Streaming \
+  --ptz \
+  --no_fork --no_close
