@@ -8,7 +8,7 @@ GATEWAY="$3"
 DNS="$4"
 
 # static-ip 프로필 삭제 후 생성
-sudo mcli connection delete static-ip >/dev/null 2>&1
+sudo nmcli connection delete static-ip >/dev/null 2>&1
 sudo nmcli connection add type ethernet con-name static-ip ifname "$(ip route | grep '^default' | awk '{print $5}')" \
     ipv4.addresses "$STATIC_IP/$PREFIX" \
     ipv4.gateway "$GATEWAY" \
