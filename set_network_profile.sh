@@ -1,64 +1,37 @@
 #!/bin/bash
+# 사용법: ./create_profiles.sh <STATIC_IP> <GATEWAY> <DNS> [PREFIX]
+# 예시: ./create_profiles.sh 10.10.30.50 10.10.30.1 8.8.8.8 24
 
-# 사용법 안내
-if [ -z "$1" ]; then
-    echo "사용법: $0 <STATIC_IP/CIDR> [GATEWAY] [DNS]"
-    echo "예시1: $0 10.10.30.50/24 10.10.30.1 8.8.8.8,1.1.1.1"
-    echo "예시2: $0 10.3.2.105/8 10.3.2.1"
+STATIC_IP="$1"
+GATEWAY="$2"
+DNS="$3"
+PREFIX="${4:-24}"  # 기본은 /24
+
+# 인터페이스 이름 확인
+IFACE=$(nmcli -t -f NAME,DEVICE connection show --active | grep ":$(ip route | grep '^default' | awk '{print $5}')$" | cut -d: -f1)
+
+if [ -z "$IFACE" ]; then
+    echo "⚠️ 활성화된 네트워크 인터페이스를 찾을 수 없습니다."
     exit 1
 fi
 
-STATIC_IP_CIDR=$1
-GATEWAY=$2
-DNS=$3
+echo "➡️ 네트워크 프로필 생성 중... (인터페이스: $IFACE)"
 
-# 게이트웨이 자동 추출
-if [ -z "$GATEWAY" ]; then
-    echo "[1] DHCP에서 게이트웨이 가져오는 중..."
-    GATEWAY=$(ip route | grep default | awk '{print $3}')
-    if [ -z "$GATEWAY" ]; then
-        echo "❌ 게이트웨이를 찾을 수 없습니다. 직접 입력하세요."
-        exit 1
-    fi
-    echo "→ 게이트웨이 자동 설정: $GATEWAY"
-else
-    echo "→ 입력받은 게이트웨이 사용: $GATEWAY"
-fi
-
-# DNS 자동 설정
-if [ -z "$DNS" ]; then
-    DNS="8.8.8.8,1.1.1.1"
-    echo "→ 기본 DNS 사용: $DNS"
-else
-    echo "→ 입력받은 DNS 사용: $DNS"
-fi
-
-# 기존 연결 삭제
-sudo nmcli connection delete static-ip >/dev/null 2>&1
-sudo nmcli connection delete dhcp-ip >/dev/null 2>&1
-
-# static-ip 프로파일 생성
-sudo nmcli connection add type ethernet ifname eth0 con-name static-ip \
-    autoconnect no \
-    ipv4.addresses ${STATIC_IP_CIDR} \
-    ipv4.gateway ${GATEWAY} \
-    ipv4.dns "${DNS}" \
-    ipv4.route-metric 10 \
+# static-ip 프로필 삭제 후 생성
+nmcli connection delete static-ip >/dev/null 2>&1
+nmcli connection add type ethernet con-name static-ip ifname "$(ip route | grep '^default' | awk '{print $5}')" \
+    ipv4.addresses "$STATIC_IP/$PREFIX" \
+    ipv4.gateway "$GATEWAY" \
+    ipv4.dns "$DNS" \
     ipv4.method manual
 
-# dhcp-ip 프로파일 생성
-sudo nmcli connection add type ethernet ifname eth0 con-name dhcp-ip \
-    ipv4.method auto \
-    autoconnect no
+# dhcp-ip 프로필 없으면 생성
+if ! nmcli connection show | grep -q "^dhcp-ip"; then
+    nmcli connection add type ethernet con-name dhcp-ip ifname "$(ip route | grep '^default' | awk '{print $5}')" \
+        ipv4.method auto
+    echo "✅ DHCP 프로필 생성 완료"
+else
+    echo "ℹ️ DHCP 프로필은 이미 존재"
+fi
 
-# 다른 활성화된 연결 비활성화 (eth0 제외)
-for CONN in $(nmcli -t -f NAME,DEVICE connection show --active | grep -v ":eth0" | cut -d: -f1); do
-    echo "🔻 다른 연결 비활성화: $CONN"
-    sudo nmcli connection down "$CONN"
-done
-
-# default route 강제 지정
-sudo ip route del default 2>/dev/null
-sudo ip route add default via ${GATEWAY} dev eth0
-
-echo "✅ static-ip(${STATIC_IP_CIDR}, GW: ${GATEWAY}, DNS: ${DNS}) 과 dhcp-ip 생성 완료"
+echo "✅ 프로필 생성 완료"
