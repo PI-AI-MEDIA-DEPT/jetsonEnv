@@ -7,16 +7,6 @@ GATEWAY="$2"
 DNS="$3"
 PREFIX="${4:-24}"  # 기본은 /24
 
-# 인터페이스 이름 확인
-IFACE=$(nmcli -t -f NAME,DEVICE connection show --active | grep ":$(ip route | grep '^default' | awk '{print $5}')$" | cut -d: -f1)
-
-if [ -z "$IFACE" ]; then
-    echo "⚠️ 활성화된 네트워크 인터페이스를 찾을 수 없습니다."
-    exit 1
-fi
-
-echo "➡️ 네트워크 프로필 생성 중... (인터페이스: $IFACE)"
-
 # static-ip 프로필 삭제 후 생성
 nmcli connection delete static-ip >/dev/null 2>&1
 nmcli connection add type ethernet con-name static-ip ifname "$(ip route | grep '^default' | awk '{print $5}')" \
