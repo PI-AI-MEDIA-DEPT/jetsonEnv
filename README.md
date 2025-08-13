@@ -9,9 +9,11 @@
     nmcli connection show
     nmcli device status
 
-    . set_network_profile #원하는 고정 IP #게이트웨이 # dns
-    ex) . set_network_profile.sh 10.10.30.50 10.10.30.1 8.8.8.8,1.1.1.1
-    ex) . set_network_profile.sh 10.10.30.50 10.10.30.1 8.8.8.8
+    . set_network_profile #원하는 고정 #서브넷 IP #게이트웨이 # dns
+       /8 -> 255.0.0.0  
+       /24 -> 255.255.255.0
+    ex) . set_network_profile.sh 10.10.30.50 8 10.10.30.1 8.8.8.8,1.1.1.1
+    ex) . set_network_profile.sh 10.10.30.50 24 10.10.30.1 8.8.8.8
     모두 가능
     
   ### 고정 아이피 세팅
