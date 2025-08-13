@@ -30,5 +30,5 @@ if ping -c 3 "$TEST_HOST" >/dev/null 2>&1; then
     echo "✅ 네트워크 연결 성공"
 else
     echo "❌ 네트워크 연결 실패 - DHCP로 복귀"
-    nmcli connection up dhcp-ip
+    sudo nmcli connection up dhcp-ip
 fi
