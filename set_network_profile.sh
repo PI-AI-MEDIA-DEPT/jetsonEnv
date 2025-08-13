@@ -3,9 +3,9 @@
 # 예시: ./create_profiles.sh 10.10.30.50 10.10.30.1 8.8.8.8 24
 
 STATIC_IP="$1"
-GATEWAY="$2"
-DNS="$3"
-PREFIX="${4:-24}"  # 기본은 /24
+PREFIX="${2:-24}"  # 기본은 /24
+GATEWAY="$3"
+DNS="$4"
 
 # static-ip 프로필 삭제 후 생성
 nmcli connection delete static-ip >/dev/null 2>&1
