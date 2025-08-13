@@ -2,13 +2,13 @@
 
 # 사용법 안내
 if [ -z "$1" ]; then
-    echo "사용법: $0 <STATIC_IP> [GATEWAY] [DNS]"
-    echo "예시1: $0 10.10.30.50 10.10.30.1 8.8.8.8,1.1.1.1"
-    echo "예시2: $0 10.10.30.50   # 게이트웨이, DNS 생략 시 DHCP에서 자동 추출 & 기본 DNS 적용"
+    echo "사용법: $0 <STATIC_IP/CIDR> [GATEWAY] [DNS]"
+    echo "예시1: $0 10.10.30.50/24 10.10.30.1 8.8.8.8,1.1.1.1"
+    echo "예시2: $0 10.3.2.105/8 10.3.2.1"
     exit 1
 fi
 
-STATIC_IP=$1
+STATIC_IP_CIDR=$1
 GATEWAY=$2
 DNS=$3
 
@@ -40,7 +40,7 @@ sudo nmcli connection delete dhcp-ip >/dev/null 2>&1
 # static-ip 프로파일 생성
 sudo nmcli connection add type ethernet ifname eth0 con-name static-ip \
     autoconnect no \
-    ipv4.addresses ${STATIC_IP}/24 \
+    ipv4.addresses ${STATIC_IP_CIDR} \
     ipv4.gateway ${GATEWAY} \
     ipv4.dns "${DNS}" \
     ipv4.route-metric 10 \
@@ -61,4 +61,4 @@ done
 sudo ip route del default 2>/dev/null
 sudo ip route add default via ${GATEWAY} dev eth0
 
-echo "✅ static-ip(${STATIC_IP}, GW: ${GATEWAY}, DNS: ${DNS}) 과 dhcp-ip 생성 완료"
+echo "✅ static-ip(${STATIC_IP_CIDR}, GW: ${GATEWAY}, DNS: ${DNS}) 과 dhcp-ip 생성 완료"
