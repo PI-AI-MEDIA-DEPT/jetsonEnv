@@ -1,6 +1,6 @@
 #!/bin/bash
 # 사용법: ./create_profiles.sh <STATIC_IP> <GATEWAY> <DNS> [PREFIX]
-# 예시: ./create_profiles.sh 10.10.30.50 10.10.30.1 8.8.8.8 24
+# 예시: ./set_network_profile.sh 10.10.30.111 24 10.10.30.1 168.8.8.8 24
 
 STATIC_IP="$1"
 PREFIX="${2:-24}"  # 기본은 /24
